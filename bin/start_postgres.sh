@@ -1,9 +1,11 @@
 #!/usr/bin/env bash
+# run this bash script inside bin directory
 
 set -euo pipefail
 which psql > /dev/null || { echo "Please ensure that postgres client is in your PATH" ; echo "$*" >&2; exit 1; }
 
-docker stop pg-docker
+docker stop pg-docker || { echo "No docker conatainer named pg-docker is running " ; }
+
 
 mkdir -p $HOME/docker/volumes/postgres
 rm -rf $HOME/docker/volumes/postgres/data
